@@ -80,7 +80,7 @@ function ChangeNameModal ({closeChangeNameModal})
           ><input 
           type="firstname" 
           id="firstname"
-          value={firstName}
+          placeholder={firstName}
           onChange={handleChangeFirstName} />
         </div>
         <div class="input-wrapper">
@@ -88,13 +88,13 @@ function ChangeNameModal ({closeChangeNameModal})
           ><input 
           type="lastname" 
           id="lastname"
-          value={lastName}
+          placeholder={lastName}
           onChange={handleChangeLastName} />
           
         </div>
         <div className="cta-buttons">
-            <button className="button edit-button" type="submit">Save</button>
-            <button className="button edit-button "  onClick={closeChangeNameModal}>Cancel</button>
+            <button className=" edit-button" type="submit">Save</button>
+            <button className=" edit-button "  onClick={closeChangeNameModal}>Cancel</button>
         </div>
 
       </form>
