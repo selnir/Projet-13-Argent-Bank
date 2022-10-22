@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import reportWebVitals from './reportWebVitals';
-import route from './route';
+import RouteBank from './route';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -11,7 +11,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      {route}
+      <RouteBank/>
     </Provider>
   </React.StrictMode>
 );

@@ -1,13 +1,44 @@
 import React from "react";
-
-
-
+import { useDispatch, useSelector } from "react-redux";
+import requestHandler from "../../utils/GenFetch";
+import { getUserInfos } from "../../features/userProfile";
+import { useState } from "react";
+import ChangeNameModal from "../../component/ChangeNameModale/ChangeNameModale";
 
 function User() {
+
+  const dispatch = useDispatch()
+    const token = useSelector((state) => state.login.token)
+    const firstName = useSelector((state) => state.userProfile.firstName)
+    const lastName = useSelector((state) => state.userProfile.lastName)
+    const [changeName, setChangeName] = useState(false)
+
+    const openChangeNameModale= () => {
+        setChangeName(true)
+    }
+    const closeChangeNameModale = () => {
+        setChangeName(false)
+    }
+    const postApi = async () => {
+        const response = await requestHandler({
+            url: `http://localhost:3001/api/v1/user/profile/`,
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer' + token
+                },
+        });
+        if (response.status === 200) {
+            dispatch(getUserInfos(response.body))
+            } 
+        };
+        postApi();
+
+
     return (<main class="main bg-dark">
     <div class="header">
-      <h1>Welcome back<br />Tony Jarvis!</h1>
-      <button class="edit-button">Edit Name</button>
+    <h1>Welcome back {changeName ? (null) : <br />}{changeName ? (null) : firstName} {changeName ? (null) : lastName} !</h1>
+            {changeName ? (<ChangeNameModal  closeChangeNameModal={closeChangeNameModale}/>) : false}
+            {changeName ? (null) : <button onClick={openChangeNameModale} className=' edit-button'>Edit name</button>}
     </div>
     <h2 class="sr-only">Accounts</h2>
     <section class="account">
